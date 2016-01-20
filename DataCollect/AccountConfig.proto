@@ -1,0 +1,10 @@
+message AccountConfig{
+
+	
+		optional string BrokerID =1;
+		optional string UserID=2;
+		optional string Password=3;
+		optional string Front_IP=4;
+	
+
+}

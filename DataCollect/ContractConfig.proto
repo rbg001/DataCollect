@@ -1,0 +1,16 @@
+message ContractConfig{
+
+	message ContractItem{
+		optional string  ContractName =1;
+		optional string ContractCode=2;
+		optional string BeginTime1=3;
+		optional string EndTime1=4;
+		optional string BeginDate=5;
+		optional string EndDate=6;
+		optional string BeginTime2=7;
+		optional string EndTime2=8;
+	}
+	
+	repeated ContractItem contracts = 9;
+
+}
