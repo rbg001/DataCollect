@@ -31,15 +31,39 @@ void QCTPMdSpi::OnFrontConnected()
 }
 
 
-
+///        0x1001 网络读失败
+///        0x1002 网络写失败
+///        0x2001 接收心跳超时
+///        0x2002 发送心跳失败
+///        0x2003 收到错误报文
 void QCTPMdSpi::OnFrontDisconnected(int nReason)
 {
+	switch (nReason){
+
+	case 0x1001:
+		cout << "网络读失败" << endl;
+		break;
+	case 0x1002:
+		cout << "网络写失败" << endl;
+		break;
+	case 0x2001:
+		cout << "接收心跳超时" << endl;
+		break;
+	case 0x2002:
+		cout << "发送心跳失败" << endl;
+		break;
+	case 0x2003:
+		cout << "收到错误报文" << endl;
+		break;
+	}
+	
+
 	cout << "OnFrontDisconnected";
 }
 
 void QCTPMdSpi::OnHeartBeatWarning(int nTimeLapse)
 {
-	cout << "OnHeartBeatWarning";
+	cout << "OnHeartBeatWarning====>" << nTimeLapse;
 }
 
 
