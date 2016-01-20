@@ -11,7 +11,9 @@
 
 class AccountWindow;
 class ContractConfig;
-
+class CThostFtdcMdApi;
+class QCTPMdSpi;
+class AccountConfig;
 class  MainWindow : public QMainWindow
 {
 	Q_OBJECT;
@@ -20,9 +22,19 @@ public:
 	~MainWindow();
 protected:
 private:
+
+	int run_status = 0; //0 代表没有运行 1 代表运行
+
 	char ** code_list = NULL;//用来保存合约列表
 	int code_size = 0;
-	int run_status = 0; //0 代表没有运行 1 代表运行
+	ContractConfig * config_data = NULL;
+	AccountConfig * account_data = NULL;
+	
+	CThostFtdcMdApi* pUserApi = NULL;
+	QCTPMdSpi * pUserSpi = NULL;
+
+
+
 
 	QSize sizeHint() const;
 	QSize size()const;
@@ -42,7 +54,7 @@ private:
 	QToolBar *toolBar;
 
 	Ui_Config *  config_window = NULL;
-	ContractConfig * config_data = NULL;
+	
 	AccountWindow * accWindow = NULL;
 	private slots:
 		void openConfigWindow();

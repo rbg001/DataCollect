@@ -11,16 +11,16 @@
 class QCTPMdSpi :public CThostFtdcMdSpi {
 
 private:
-	char * BrokerID;
-	char * UserID;
-	char * Password;
+	const char * BrokerID;
+	const char * UserID;
+	const char * Password;
 	
 
 public:
 	char ** codeList;
 	int code_size;
 
-	void SetLoginFiled(char * _BrokerID,char * _UserID,char * _Password);
+	void SetLoginFiled(const char * _BrokerID, const char * _UserID, const char * _Password);
 	QCTPMdSpi(CThostFtdcMdApi* api);
 
 	QCTPMdSpi();
@@ -67,5 +67,6 @@ public:
 
 	///Ñ¯¼ÛÍ¨Öª
 	virtual void OnRtnForQuoteRsp(CThostFtdcForQuoteRspField *pForQuoteRsp);
+
 	CThostFtdcMdApi* pUserApi;
 };

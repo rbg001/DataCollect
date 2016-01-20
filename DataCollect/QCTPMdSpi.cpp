@@ -83,9 +83,10 @@ void QCTPMdSpi::OnRspUnSubForQuoteRsp(CThostFtdcSpecificInstrumentField * pSpeci
 
 void QCTPMdSpi::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField * pDepthMarketData)
 {
-	cout << "InstrumentID:"<<pDepthMarketData->InstrumentID<<"||SettlementPrice:"<<pDepthMarketData->SettlementPrice<<"||UpdateMillisec:"<<pDepthMarketData->UpdateMillisec<<"||最新价:"<<pDepthMarketData->LastPrice<<endl;
+	cout << "InstrumentID:" << pDepthMarketData->InstrumentID << "||SettlementPrice:" << pDepthMarketData->SettlementPrice << "||UpdateMillisec:" << pDepthMarketData->UpdateMillisec << "||最新价:" << pDepthMarketData->LastPrice << endl;
 
 	//mysql_insert->InsertDepthMarketData(pDepthMarketData);
+
 }
 
 void QCTPMdSpi::OnRtnForQuoteRsp(CThostFtdcForQuoteRspField * pForQuoteRsp)
@@ -94,7 +95,7 @@ void QCTPMdSpi::OnRtnForQuoteRsp(CThostFtdcForQuoteRspField * pForQuoteRsp)
 }
 
 
-void QCTPMdSpi::SetLoginFiled(char * _BrokerID,char * _UserID,char * _Password){
+void QCTPMdSpi::SetLoginFiled(const char * _BrokerID, const char * _UserID, const char * _Password){
 
 	
 

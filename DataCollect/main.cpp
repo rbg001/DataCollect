@@ -13,6 +13,7 @@ void ReadFromPB();
 using namespace std;
 
 char ** getArr(std::string * b, int length);
+void Test(string &name);
 int main(int argc, char *argv[])
 {
 
@@ -24,13 +25,23 @@ int main(int argc, char *argv[])
 	//0x007464e8
 	MainWindow mainwindow;
 	mainwindow.show();
-	//
+	
 
 	return a.exec();
 
 
 	//WriteToPB();
 	//ReadFromPB();
+
+	//string aaa = "asd";
+	//Test(aaa);
+	//qDebug(aaa.c_str());
+
+}
+
+
+void Test(string &name){
+	name = "123123";
 }
 
 void ReadFromPB(){

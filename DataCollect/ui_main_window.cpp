@@ -1,8 +1,10 @@
 ﻿#pragma once
 #pragma execution_character_set("utf-8")
 #define CONFIG_FILE_NAME "ContractConfig.pb"
+#define ACCOUNT_CONFIG_FILE_NAME "AccountContractConfig.pb"
 #include "ui_main_window.h"
 #include "ContractConfig.pb.h"
+#include "AccountConfig.pb.h"
 #include<QAction>
 #include <QtWidgets>
 
@@ -13,7 +15,7 @@
 #include "ui_config.h"
 #include <string>
 #include "ArrayUtil.h"
-
+#include "QCTPMdSpi.h"
 
 MainWindow::MainWindow(QWidget * parent) :QMainWindow(parent){
 	//测试
@@ -83,6 +85,7 @@ void MainWindow::openConfigWindow()
 	
 	config_window->setModal(true);
 	config_window->show();
+	readConfig();
 }
 
 void MainWindow::createEvent()
@@ -95,11 +98,28 @@ void MainWindow::createEvent()
 void MainWindow::readConfig()
 {
 	using namespace std;
+
+	if (config_data != NULL)
+	{
+		delete config_data;
+	}
+
 	config_data = new ContractConfig();
 
 	if (access(CONFIG_FILE_NAME, 0) == 0){
-		fstream input("ContractConfig.pb", ios::in | ios::binary);
+		fstream input(CONFIG_FILE_NAME, ios::in | ios::binary);
 		config_data->ParseFromIstream(&input);
+		input.close();
+	}
+
+	if (account_data!=NULL)
+	{
+		delete account_data;
+	}
+	account_data = new AccountConfig;
+	if (access(ACCOUNT_CONFIG_FILE_NAME, 0) == 0){
+		fstream input(ACCOUNT_CONFIG_FILE_NAME, ios::in | ios::binary);
+		account_data->ParseFromIstream(&input);
 		input.close();
 	}
 }
@@ -112,6 +132,7 @@ void MainWindow::openAccountConfigWindow()
 	
 	accWindow->setModal(true);
 	accWindow->show();
+	
 }
 
 
@@ -194,6 +215,34 @@ void MainWindow::startCollectEvent()
 			qDebug(code_list[i]);
 		}
 		delete []code_tmp;
+		//读取账户信息
+
+
+		if (pUserApi!=NULL)
+		{
+			pUserApi->Release();
+			
+		}
+
+		//调用CTP
+
+		pUserApi = CThostFtdcMdApi::CreateFtdcMdApi("", true);
+		QCTPMdSpi * pUserSpi = new QCTPMdSpi(pUserApi);
+
+		pUserSpi->SetLoginFiled(account_data->brokerid().c_str(),account_data->userid().c_str(),account_data->password().c_str());
+	
+		pUserApi->RegisterSpi(pUserSpi);
+		char * front = new char[account_data->front_ip().length()];
+		
+			
+		strcpy(front,account_data->front_ip().c_str());
+
+		pUserApi->RegisterFront(front);
+		pUserSpi->codeList = code_list;
+		pUserSpi->code_size = code_size;
+		pUserApi->Init();
+		pUserApi->Join();
+		
 }
 
 
