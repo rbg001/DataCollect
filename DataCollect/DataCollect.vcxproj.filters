@@ -122,6 +122,24 @@
     <ClCompile Include="ArrayUtil.cpp">
       <Filter>Source Files\util</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ui_data_query.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ui_data_query.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="ui_data_query.cpp">
+      <Filter>Source Files\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ui_file_name.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ui_file_name.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="ui_file_name.cpp">
+      <Filter>Source Files\ui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="datacollect.h">
@@ -140,6 +158,12 @@
       <Filter>Header Files\ui</Filter>
     </CustomBuild>
     <CustomBuild Include="ui_account.h">
+      <Filter>Header Files\ui</Filter>
+    </CustomBuild>
+    <CustomBuild Include="ui_data_query.h">
+      <Filter>Header Files\ui</Filter>
+    </CustomBuild>
+    <CustomBuild Include="ui_file_name.h">
       <Filter>Header Files\ui</Filter>
     </CustomBuild>
   </ItemGroup>

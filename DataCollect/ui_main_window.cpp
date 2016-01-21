@@ -16,9 +16,10 @@
 #include <string>
 #include "ArrayUtil.h"
 #include "QCTPMdSpi.h"
-
+#include "ui_file_name.h"
 MainWindow::MainWindow(QWidget * parent) :QMainWindow(parent){
-	//测试
+
+	setupUi();
 	createActions();
 	createMenus();
 	createEvent();
@@ -93,6 +94,8 @@ void MainWindow::createEvent()
 	connect(showConfigWindow, SIGNAL(triggered()), this, SLOT(openConfigWindow()));
 	connect(showAccountConfig, SIGNAL(triggered()), this, SLOT(openAccountConfigWindow()));
 	connect(startCollect, SIGNAL(triggered()), this, SLOT(startCollectEvent()));
+	connect(newMonitor, SIGNAL(triggered()), this, SLOT(newFileNameWindow()));
+	//connect(mid,SIGNAL(subWindowActivated(QMdiSubWindow *),this,SLOT()),
 }
 
 void MainWindow::readConfig()
@@ -116,7 +119,9 @@ void MainWindow::readConfig()
 	{
 		delete account_data;
 	}
+
 	account_data = new AccountConfig;
+
 	if (access(ACCOUNT_CONFIG_FILE_NAME, 0) == 0){
 		fstream input(ACCOUNT_CONFIG_FILE_NAME, ios::in | ios::binary);
 		account_data->ParseFromIstream(&input);
@@ -147,21 +152,16 @@ MainWindow::~MainWindow(){
 	delete menu;
 	delete toolBar;
 	delete config_data;
-
+	delete account_data;
 	delete  config_window;
 	delete  accWindow;
-
-
-
+	delete file_window;
 	//删除合约列表占用的空间
 	for (int i = 0; i < code_size; i++)
 	{
 		delete[]code_list[i];
 	}
-
-
 	delete[] code_list;
-
 }
 
 void MainWindow::startCollectEvent()
@@ -188,63 +188,90 @@ void MainWindow::startCollectEvent()
 
 
 	
-		//初始化合约列表
+	//初始化合约列表
 
-		ArrayUtil util;
-		if (code_list != NULL)
-		{
-			for (int i = 0; i < code_size; i++)
-			{
-				delete[]code_list[i];
-			}
-			delete[] code_list;
-		}
-
-		code_size = config.contracts_size();
-
-		string * code_tmp = new string[code_size];
+	ArrayUtil util;
+	if (code_list != NULL)
+	{
 		for (int i = 0; i < code_size; i++)
 		{
-			code_tmp[i] = config.contracts(i).contractcode();
+			delete[]code_list[i];
 		}
+		delete[] code_list;
+	}
 
-		code_list = util.getArr(code_tmp, code_size);
+	code_size = config.contracts_size();
 
-		for (int i = 0; i < code_size; i++)
-		{
-			qDebug(code_list[i]);
-		}
-		delete []code_tmp;
-		//读取账户信息
+	string * code_tmp = new string[code_size];
+	for (int i = 0; i < code_size; i++)
+	{
+		code_tmp[i] = config.contracts(i).contractcode();
+	}
+
+	code_list = util.getArr(code_tmp, code_size);
+
+	for (int i = 0; i < code_size; i++)
+	{
+		qDebug(code_list[i]);
+	}
+	delete []code_tmp;
+	//读取账户信息
 
 
-		if (pUserApi!=NULL)
-		{
-			pUserApi->Release();
+	if (pUserApi!=NULL)
+	{
+		pUserApi->Release();
 			
-		}
+	}
 
-		//调用CTP
+	//调用CTP
 
-		pUserApi = CThostFtdcMdApi::CreateFtdcMdApi("", true);
-		QCTPMdSpi * pUserSpi = new QCTPMdSpi(pUserApi);
+	pUserApi = CThostFtdcMdApi::CreateFtdcMdApi("", true);
+	QCTPMdSpi * pUserSpi = new QCTPMdSpi(pUserApi);
 
-		pUserSpi->SetLoginFiled(account_data->brokerid().c_str(),account_data->userid().c_str(),account_data->password().c_str());
+	pUserSpi->SetLoginFiled(account_data->brokerid().c_str(),account_data->userid().c_str(),account_data->password().c_str());
 	
-		pUserApi->RegisterSpi(pUserSpi);
-		char * front = new char[account_data->front_ip().length()];
-		
-			
-		strcpy(front,account_data->front_ip().c_str());
+	pUserApi->RegisterSpi(pUserSpi);
+	char * front = new char[account_data->front_ip().length()];
 
-		pUserApi->RegisterFront(front);
-		pUserSpi->codeList = code_list;
-		pUserSpi->code_size = code_size;
-		pUserApi->Init();
-		pUserApi->Join();
+			
+	strcpy(front,account_data->front_ip().c_str());
+
+	pUserApi->RegisterFront(front);
+	pUserSpi->codeList = code_list;
+	pUserSpi->code_size = code_size;
+	pUserApi->Init();
+	//pUserApi->Join();
 		
 }
 
+void MainWindow::setupUi()
+{
+	using namespace  std;
+	mdi = new QMdiArea;
+	setCentralWidget(mdi);
+}
 
 
+void MainWindow::openNewQueryWindow(string code)
+{
 
+	queryWindow = new DataQueryWindow(code);
+	QMdiSubWindow * window = mdi->addSubWindow(queryWindow);
+	window->show();
+	window_map.insert(std::map<std::string, QMdiSubWindow *>::value_type(code, window));
+
+
+}
+
+void MainWindow::newFileNameWindow()
+{
+	if (file_window!=NULL)
+	{
+		delete file_window;
+	}
+	file_window = new FileNameWindow(this);
+	file_window->setModal(true);
+	file_window->show();
+
+}

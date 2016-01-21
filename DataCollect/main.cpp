@@ -7,6 +7,8 @@
 #include <fstream>  
 #include<string>
 #include "ArrayUtil.h"
+#include "ui_data_query.h"
+#include "ui_file_name.h"
 #include "vld.h"
 void WriteToPB();
 void ReadFromPB();
@@ -25,7 +27,12 @@ int main(int argc, char *argv[])
 	//0x007464e8
 	MainWindow mainwindow;
 	mainwindow.show();
-	
+
+	/*FileNameWindow window;
+	window.show();
+	*/
+	/*DataQueryWindow window;
+	window.show();*/
 
 	return a.exec();
 
@@ -54,11 +61,7 @@ void ReadFromPB(){
 		ContractConfig_ContractItem item = config->contracts(a);
 		cout << item.contractname()<<endl;
 	}
-	   
-
 	config->ParseFromIstream(&input);
-	
-
 	delete config;
 }
 
