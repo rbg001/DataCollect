@@ -37,10 +37,8 @@ private:
 	void setupEvent();
 	bool checkData();
 
-
 	private slots:
 	void saveData();
-	
 };
 
 #endif 
