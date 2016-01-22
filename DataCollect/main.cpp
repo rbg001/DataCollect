@@ -24,10 +24,10 @@ int main(int argc, char *argv[])
 
 	
 	
-	MainWindow * mainwindow = new MainWindow;
+	MainWindow  mainwindow ;
 
 	
-	mainwindow->show();
+	mainwindow.show();
 
 
 	return a.exec();
