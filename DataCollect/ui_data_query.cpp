@@ -15,9 +15,21 @@ DataQueryWindow::DataQueryWindow(std::string _code,QWidget * parent) :QDialog(pa
 void DataQueryWindow::setupUi(){
 
 	code_label = new QLabel(tr("合约代码："));
-	code = new QLabel("0");
+	code = new QLabel(tr(this_code.c_str()));
 	last_label = new QLabel(tr("最新价:"));
 	last = new QLabel(0);
+
+	OpenPriceLabel = new QLabel("今开盘");
+	OpenPrice = new QLabel;
+
+	ClosePriceLabel = new QLabel("今收盘");
+	ClosePrice = new QLabel;
+
+	minLabel = new QLabel("最低价");
+	min = new QLabel;
+	 
+	maxLabel = new QLabel("最高价");
+	max = new QLabel;
 
 
 	hLayout = new QHBoxLayout;
@@ -26,6 +38,17 @@ void DataQueryWindow::setupUi(){
 	hLayout->addWidget(code);
 	hLayout->addWidget(last_label);
 	hLayout->addWidget(last);
+	hLayout->addWidget(OpenPriceLabel);
+	hLayout->addWidget(OpenPrice);
+	hLayout->addWidget(ClosePriceLabel);
+	hLayout->addWidget(ClosePrice);
+
+	hLayout->addWidget(minLabel);
+	hLayout->addWidget(min);
+
+	hLayout->addWidget(maxLabel);
+	hLayout->addWidget(max);
+
 	hLayout->addStretch();
 
 	//初始化列表

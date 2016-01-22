@@ -35,8 +35,7 @@ private:
 	ContractConfig * config_data = NULL;
 	AccountConfig * account_data = NULL;
 	
-	QMdiArea * mdi;
-
+	
 	CThostFtdcMdApi* pUserApi = NULL;
 	QCTPMdSpi * pUserSpi = NULL;
 
@@ -70,6 +69,10 @@ private:
 	FileNameWindow * file_window = NULL;
 	map<string, QMdiSubWindow *>   window_map;
 
+
+	//容器
+	QMdiArea * mdi;
+	QScrollArea *scrollAre;
 	private slots:
 		void openConfigWindow();
 		void openAccountConfigWindow();

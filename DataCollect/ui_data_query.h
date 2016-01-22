@@ -16,10 +16,35 @@ public:
 private:
 
 	std::string this_code;
+
+	//合约代码
 	QLabel * code_label;
 	QLabel * code;
+
+
+	//最新价
 	QLabel * last_label;
 	QLabel * last;
+
+
+	//今开盘
+	QLabel * OpenPriceLabel;
+	QLabel * OpenPrice;
+
+	//今收盘
+	QLabel * ClosePriceLabel;
+	QLabel * ClosePrice;
+
+	
+
+	//最低价
+	QLabel * minLabel;
+	QLabel * min;
+	//最高价
+	QLabel * maxLabel;
+	QLabel * max;
+
+
 
 	QHBoxLayout * hLayout;
 	QVBoxLayout * vLayout;

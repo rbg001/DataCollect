@@ -248,7 +248,11 @@ void MainWindow::startCollectEvent()
 void MainWindow::setupUi()
 {
 	using namespace  std;
+
 	mdi = new QMdiArea;
+	mdi->setVerticalScrollBarPolicy(Qt::ScrollBarPolicy::ScrollBarAsNeeded);
+	mdi->setHorizontalScrollBarPolicy(Qt::ScrollBarPolicy::ScrollBarAsNeeded);
+
 	setCentralWidget(mdi);
 }
 
