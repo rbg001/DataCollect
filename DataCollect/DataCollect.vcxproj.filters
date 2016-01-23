@@ -140,6 +140,9 @@
     <ClCompile Include="ui_file_name.cpp">
       <Filter>Source Files\ui</Filter>
     </ClCompile>
+    <ClCompile Include="DepthMarketData.pb.cc">
+      <Filter>Source Files\protoc\pb_bean</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="datacollect.h">
@@ -204,6 +207,9 @@
     <ClInclude Include="ArrayUtil.h">
       <Filter>Header Files\util</Filter>
     </ClInclude>
+    <ClInclude Include="DepthMarketData.pb.h">
+      <Filter>Header Files\protoc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DataCollect.rc" />
@@ -218,6 +224,9 @@
     <None Include="ctp_api\error.dtd" />
     <None Include="ctp_api\thostmduserapi.dll" />
     <None Include="ctp_api\thosttraderapi.dll" />
+    <None Include="DepthMarketData.proto">
+      <Filter>protobuffer</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="ctp_api\error.xml" />

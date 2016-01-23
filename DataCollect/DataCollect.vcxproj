@@ -143,6 +143,7 @@
     <ClCompile Include="ArrayUtil.cpp" />
     <ClCompile Include="ContractConfig.pb.cc" />
     <ClCompile Include="datacollect.cpp" />
+    <ClCompile Include="DepthMarketData.pb.cc" />
     <ClCompile Include="GeneratedFiles\Debug\moc_datacollect.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
@@ -259,6 +260,7 @@
     <ClInclude Include="ctp_api\ThostFtdcTraderApi.h" />
     <ClInclude Include="ctp_api\ThostFtdcUserApiDataType.h" />
     <ClInclude Include="ctp_api\ThostFtdcUserApiStruct.h" />
+    <ClInclude Include="DepthMarketData.pb.h" />
     <ClInclude Include="GeneratedFiles\ui_datacollect.h" />
     <CustomBuild Include="ui_file_name.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
@@ -382,6 +384,7 @@
     <None Include="ctp_api\error.dtd" />
     <None Include="ctp_api\thostmduserapi.dll" />
     <None Include="ctp_api\thosttraderapi.dll" />
+    <None Include="DepthMarketData.proto" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="ctp_api\error.xml" />

@@ -24,6 +24,8 @@ public:
 	MainWindow(QWidget * parent = 0);
 	~MainWindow();
 	void openNewQueryWindow(string code);
+	//保存了打开的查询窗口
+	map<string, QMdiSubWindow *>   window_map;
 protected:
 private:
 	
@@ -67,7 +69,7 @@ private:
 	AccountWindow * accWindow = NULL;
 	DataQueryWindow * queryWindow = NULL;
 	FileNameWindow * file_window = NULL;
-	map<string, QMdiSubWindow *>   window_map;
+	
 
 
 	//容器

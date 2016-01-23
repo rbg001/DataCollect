@@ -8,6 +8,7 @@
 #include "ctp_api/ThostFtdcUserApiStruct.h"
 #include "ctp_api/ThostFtdcMdApi.h"
 #include "ctp_api/ThostFtdcTraderApi.h"
+class DepthMarketData;
 class QCTPMdSpi :public CThostFtdcMdSpi {
 
 private:
@@ -19,7 +20,8 @@ private:
 public:
 	char ** codeList;
 	int code_size;
-
+	double checkDouble(double number);
+	void CThostFtdcDepthMarketDataField_2_PB(DepthMarketData * pb_bean,CThostFtdcDepthMarketDataField * pDepthMarketData);
 	void SetLoginFiled(const char * _BrokerID, const char * _UserID, const char * _Password);
 	QCTPMdSpi(CThostFtdcMdApi* api);
 
